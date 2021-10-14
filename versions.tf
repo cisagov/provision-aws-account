@@ -6,12 +6,9 @@ terraform {
   # major version currently being used.  This practice will help us
   # avoid unwelcome surprises.
   required_providers {
-    # Version 3.38.0 of the Terraform AWS provider is the first
-    # version to support default tags.
-    # https://www.hashicorp.com/blog/default-tags-in-the-terraform-aws-provider
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.38"
+    controltower = {
+      source  = "idealo/controltower"
+      version = "~> 1.0"
     }
   }
 }

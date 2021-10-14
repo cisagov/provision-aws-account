@@ -1,13 +1,9 @@
-# This is an example of what a provider looks like.
-#
-# provider "aws" {
-#   alias = "myprovider"
-#   assume_role {
-#     role_arn     = "arn:aws:iam::123456789012:role/MyRole"
-#     session_name = "MySessionName"
-#   }
-#   default_tags {
-#     tags = var.tags
-#   }
-#   region = var.aws_region
-# }
+# This is the "default" provider that is used to create resources
+# inside the AWS account where you want Control Tower to run.
+provider "controltower" {
+  # Use this profile, defined using programmatic credentials for
+  # AWSAdministratorAccess as obtained from your AWS SSO page
+  # for the AWS account where you want Control Tower to run.
+  profile = "provision-aws-account"
+  region  = var.aws_region
+}
