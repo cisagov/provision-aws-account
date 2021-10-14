@@ -47,7 +47,7 @@ variable "aws_region" {
 
 variable "provisioned_product_name" {
   type        = string
-  description = "Name of the service catalog product that is provisioned. If not provided, defaults to a slugified version of the account name. (e.g. Example_Account."
+  description = "Name of the service catalog product that is provisioned. If not provided, defaults to a slugified version of the account name. (e.g. Example_Account)."
 }
 
 variable "tags" {
