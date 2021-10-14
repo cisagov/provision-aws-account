@@ -2,46 +2,67 @@
 
 [![GitHub Build Status](https://github.com/cisagov/provision-aws-account/workflows/build/badge.svg)](https://github.com/cisagov/provision-aws-account/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+This repository contains Terraform code for provisioning new AWS accounts
+via [Control Tower](https://aws.amazon.com/controltower/).
 
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+## Pre-requisites ##
+
+- Administrative access to an AWS account that can run Control Tower.
+- [Terraform](https://www.terraform.io/) installed on your system.
+- An accessible AWS S3 bucket to store Terraform state
+  (specified in [`backend.tf`](backend.tf)).
+- An accessible AWS DynamoDB database to store the Terraform state lock
+  (specified in [`backend.tf`](backend.tf)).
+- A Terraform [variables](variables.tf) file customized for your new
+  AWS account, for example:
+
+  ```console
+  account_email    = "admin@example.com"
+  account_name     = "Example Account"
+  account_org_unit = "Sandbox"
+  sso_email        = "john.doe@example.com"
+  sso_first_name   = "John"
+  sso_last_name    = "Doe"
+  ```
 
 ## Usage ##
 
-```hcl
-module "example" {
-  source = "github.com/cisagov/provision-aws-account"
+1. Create an AWS profile called `provision-aws-account` (if you haven't
+   already done so) in your AWS configuration using the
+   "AWSAdministratorAccess" credentials (access key ID, secret access key,
+   and session token) as obtained from the AWS account where you want
+   Control Tower to run:
 
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-}
-```
+   ```console
+   [provision-aws-account]
+   aws_access_key_id = <MY_ACCESS_KEY_ID>
+   aws_secret_access_key = <MY_SECRET_ACCESS_KEY>
+   aws_session_token = <MY_SESSION_TOKEN>
+   ```
 
-## Examples ##
+1. Create a Terraform workspace (if you haven't already done so) by running
+   `terraform workspace new <workspace_name>`.
+1. Create a `<workspace_name>.tfvars` file with all of the required
+   variables (see [Inputs](#Inputs) below for details).
+1. Run the command `terraform init`.
+1. Provision the new AWS account by running the command:
 
-- [Basic usage](https://github.com/cisagov/provision-aws-account/tree/develop/examples/basic_usage)
+   ```console
+   terraform apply -var-file=<workspace_name>.tfvars
+   ```
 
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| controltower | ~> 1.0 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
+| controltower | ~> 1.0 |
 
 ## Modules ##
 
@@ -51,41 +72,32 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_instance.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
-| [aws_ami.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
-| [aws_default_tags.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/default_tags) | data source |
+| [controltower_aws_account.account](https://registry.terraform.io/providers/idealo/controltower/latest/docs/resources/aws_account) | resource |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| ami\_owner\_account\_id | The ID of the AWS account that owns the Example AMI, or "self" if the AMI is owned by the same account as the provisioner. | `string` | `"self"` | no |
-| aws\_availability\_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.). | `string` | `"a"` | no |
+| account\_email | The root email address to associate with the AWS account (e.g. admin@example.com). | `string` | n/a | yes |
+| account\_name | The name of the AWS account to provision (e.g. Example Account). | `string` | n/a | yes |
+| account\_org\_unit | The name of the AWS Organizational Unit under which the account resides (e.g. Sandbox). | `string` | n/a | yes |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
-| subnet\_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0). | `string` | n/a | yes |
+| provisioned\_product\_name | Name of the service catalog product that is provisioned. If not provided, defaults to a slugified version of the account name. (e.g. Example\_Account. | `string` | n/a | yes |
+| sso\_email | The email address of the SSO user (e.g. john.doe@example.com).  This email address must already exist in AWS SSO. | `string` | n/a | yes |
+| sso\_first\_name | The first name of the SSO user (e.g. John). | `string` | n/a | yes |
+| sso\_last\_name | The last name of the SSO user (e.g. Doe). | `string` | n/a | yes |
+| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| arn | The EC2 instance ARN. |
-| availability\_zone | The AZ where the EC2 instance is deployed. |
-| id | The EC2 instance ID. |
-| private\_ip | The private IP of the EC2 instance. |
-| subnet\_id | The ID of the subnet where the EC2 instance is deployed. |
+| account | The AWS account created by Control Tower. |
 
 ## Notes ##
 
 Running `pre-commit` requires running `terraform init` in every directory that
-contains Terraform code. In this repository, these are the main directory and
-every directory under `examples/`.
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
+contains Terraform code. In this repository, this is only the main directory.
 
 ## Contributing ##
 
