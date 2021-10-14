@@ -82,7 +82,7 @@ No modules.
 | account\_name | The name of the AWS account to provision (e.g. Example Account). | `string` | n/a | yes |
 | account\_org\_unit | The name of the AWS Organizational Unit under which the account resides (e.g. Sandbox). | `string` | n/a | yes |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
-| provisioned\_product\_name | Name of the service catalog product that is provisioned. If not provided, defaults to a slugified version of the account name. (e.g. Example\_Account). | `string` | n/a | yes |
+| provisioned\_product\_name | Name of the service catalog product that is provisioned. If not provided, defaults to a slugified version of the account name (e.g. Example\_Account). | `string` | n/a | yes |
 | sso\_email | The email address of the SSO user (e.g. john.doe@example.com).  This email address must already exist in AWS SSO. | `string` | n/a | yes |
 | sso\_first\_name | The first name of the SSO user (e.g. John). | `string` | n/a | yes |
 | sso\_last\_name | The last name of the SSO user (e.g. Doe). | `string` | n/a | yes |
