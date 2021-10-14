@@ -86,7 +86,7 @@ No modules.
 | sso\_email | The email address of the SSO user (e.g. john.doe@example.com).  This email address must already exist in AWS SSO. | `string` | n/a | yes |
 | sso\_first\_name | The first name of the SSO user (e.g. John). | `string` | n/a | yes |
 | sso\_last\_name | The last name of the SSO user (e.g. Doe). | `string` | n/a | yes |
-| tags | Tags to apply to all AWS resources created | `map(string)` | `{}` | no |
+| tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 
 ## Outputs ##
 
