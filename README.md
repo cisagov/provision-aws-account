@@ -16,7 +16,7 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 - A Terraform [variables](variables.tf) file customized for your new
   AWS account, for example:
 
-  ```console
+  ```hcl
   account_email    = "admin@example.com"
   account_name     = "Example Account"
   account_org_unit = "Sandbox"
@@ -33,7 +33,7 @@ via [Control Tower](https://aws.amazon.com/controltower/).
    and session token) as obtained from the AWS account where you want
    Control Tower to run:
 
-   ```console
+   ```ini
    [provision-aws-account]
    aws_access_key_id = <MY_ACCESS_KEY_ID>
    aws_secret_access_key = <MY_SECRET_ACCESS_KEY>
