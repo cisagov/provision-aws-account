@@ -1,19 +1,21 @@
 
-resource "controltower_aws_account" "account" {
-  email               = var.account_email
-  name                = var.account_name
-  organizational_unit = var.account_org_unit
+resource "controltower_aws_account" "accounts" {
+  for_each = { for account in var.accounts : account.provisioned_product_name => account }
+
+  email               = each.value.account_email
+  name                = each.value.account_name
+  organizational_unit = each.value.account_org_unit
 
   lifecycle {
     prevent_destroy = true
   }
 
-  provisioned_product_name = var.provisioned_product_name
+  provisioned_product_name = each.key
 
   sso {
-    email      = var.sso_email
-    first_name = var.sso_first_name
-    last_name  = var.sso_last_name
+    email      = each.value.sso_email
+    first_name = each.value.sso_first_name
+    last_name  = each.value.sso_last_name
   }
 
   tags = var.tags

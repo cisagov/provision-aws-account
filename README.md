@@ -14,15 +14,29 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 - An accessible AWS DynamoDB database to store the Terraform state lock
   (specified in [`backend.tf`](backend.tf)).
 - A Terraform [variables](variables.tf) file customized for your new
-  AWS account, for example:
+  AWS account(s), for example:
 
   ```hcl
-  account_email    = "admin@example.com"
-  account_name     = "Example Account"
-  account_org_unit = "Sandbox"
-  sso_email        = "john.doe@example.com"
-  sso_first_name   = "John"
-  sso_last_name    = "Doe"
+  accounts = [
+    {
+      account_email = "admin1@example.com"
+      account_name = "Example Account 1"
+      account_org_unit = "Sandbox"
+      provisioned_product_name = "example-account-1"
+      sso_email = "john.doe@example.com"
+      sso_first_name = "John"
+      sso_last_name = "Doe"
+    },
+    {
+      account_email = "admin2@example.com"
+      account_name = "Example Account 2"
+      account_org_unit = "Sandbox"
+      provisioned_product_name = "example-account-2"
+      sso_email = "john.doe@example.com"
+      sso_first_name = "John"
+      sso_last_name = "Doe"
+    }
+  ]
   ```
 
 ## Usage ##
@@ -45,7 +59,7 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 1. Create a `<workspace_name>.tfvars` file with all of the required
    variables (see [Inputs](#Inputs) below for details).
 1. Run the command `terraform init`.
-1. Provision the new AWS account by running the command:
+1. Provision the new AWS account(s) by running the command:
 
    ```console
    terraform apply -var-file=<workspace_name>.tfvars
@@ -78,21 +92,15 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| account\_email | The root email address to associate with the AWS account (e.g. admin@example.com). | `string` | n/a | yes |
-| account\_name | The name of the AWS account to provision (e.g. Example Account). | `string` | n/a | yes |
-| account\_org\_unit | The name of the AWS Organizational Unit under which the account resides (e.g. Sandbox). | `string` | n/a | yes |
+| accounts | A list of objects specifying the details of the AWS account(s) to provision (e.g. [ {account\_email = "admin1@example.com", account\_name = "Example Account 1", account\_org\_unit = "Sandbox", provisioned\_product\_name = "example-account-1", sso\_email = "john.doe@example.com", sso\_first\_name = "John", sso\_last\_name = "Doe"}, {account\_email = "admin2@example.com", account\_name = "Example Account 2", account\_org\_unit = "Sandbox", provisioned\_product\_name = "example-account-2", sso\_email = "john.doe@example.com", sso\_first\_name = "John", sso\_last\_name = "Doe"} ]).  Field descriptions: account\_email - the root email address to associate with the AWS account, account\_name - the name of the AWS account to provision, account\_org\_unit - the name of the AWS Organizational Unit under which the account resides, provisioned\_product\_name - the name of the service catalog product that is provisioned, sso\_email - the email address of the SSO user (this email address must already exist in AWS SSO), sso\_first\_name - the first name of the SSO user, sso\_last\_name - the last name of the SSO user | `list(object({ account_email = string, account_name = string, account_org_unit = string, provisioned_product_name = string, sso_email = string, sso_first_name = string, sso_last_name = string }))` | n/a | yes |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
-| provisioned\_product\_name | Name of the service catalog product that is provisioned. If not provided, defaults to a slugified version of the account name (e.g. Example\_Account). | `string` | n/a | yes |
-| sso\_email | The email address of the SSO user (e.g. john.doe@example.com).  This email address must already exist in AWS SSO. | `string` | n/a | yes |
-| sso\_first\_name | The first name of the SSO user (e.g. John). | `string` | n/a | yes |
-| sso\_last\_name | The last name of the SSO user (e.g. Doe). | `string` | n/a | yes |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| account | The AWS account created by Control Tower. |
+| accounts | The AWS accounts created by Control Tower. |
 
 ## Notes ##
 
