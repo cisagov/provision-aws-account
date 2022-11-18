@@ -57,7 +57,7 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 1. Create a Terraform workspace (if you haven't already done so) by running
    `terraform workspace new <workspace_name>`.
 1. Create a `<workspace_name>.tfvars` file with all of the required
-   variables (see [Inputs](#Inputs) below for details).
+   variables (see [Inputs](#inputs) below for details).
 1. Run the command `terraform init`.
 1. Provision the new AWS account(s) by running the command:
 
