@@ -65,6 +65,7 @@ via [Control Tower](https://aws.amazon.com/controltower/).
    terraform apply -var-file=<workspace_name>.tfvars
    ```
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
@@ -101,6 +102,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | accounts | The AWS accounts created by Control Tower. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
