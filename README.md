@@ -70,7 +70,7 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 1.0 |
+| terraform | ~> 1.1 |
 | controltower | ~> 1.0 |
 
 ## Providers ##
