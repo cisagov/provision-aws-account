@@ -71,13 +71,13 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.1 |
-| controltower | ~> 1.0 |
+| controltower | ~> 2.0 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| controltower | ~> 1.0 |
+| controltower | ~> 2.0 |
 
 ## Modules ##
 
@@ -87,7 +87,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [controltower_aws_account.account](https://registry.terraform.io/providers/idealo/controltower/latest/docs/resources/aws_account) | resource |
+| [controltower_aws_account.accounts](https://registry.terraform.io/providers/idealo/controltower/latest/docs/resources/aws_account) | resource |
 
 ## Inputs ##
 
