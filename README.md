@@ -71,13 +71,13 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.1 |
-| controltower | ~> 2.0 |
+| controltower | ~> 2.1 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| controltower | ~> 2.0 |
+| controltower | ~> 2.1 |
 
 ## Modules ##
 
