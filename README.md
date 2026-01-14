@@ -1,6 +1,8 @@
 # provision-aws-account #
 
 [![GitHub Build Status](https://github.com/cisagov/provision-aws-account/workflows/build/badge.svg)](https://github.com/cisagov/provision-aws-account/actions)
+[![License](https://img.shields.io/github/license/cisagov/provision-aws-account)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/provision-aws-account/workflows/CodeQL/badge.svg)](https://github.com/cisagov/provision-aws-account/actions/workflows/codeql-analysis.yml)
 
 This repository contains Terraform code for provisioning new AWS accounts
 via [Control Tower](https://aws.amazon.com/controltower/).
