@@ -5,7 +5,10 @@ provider "registry.terraform.io/idealo/controltower" {
   version     = "2.3.0"
   constraints = "~> 2.1"
   hashes = [
+    "h1:CnJjvFNX3zwhDpvr1PBnkN7d8kHc1vjrF3iVrwOMUTI=",
+    "h1:Ut/3ROmfqah1KZRjMS/5MQdO+MNsWD7FQUF9zIrHbPw=",
     "h1:c/D/qCZdj4sx1DY5oGkNsJK5iS9JZZygFzN2NjkJ/ow=",
+    "h1:sRqH4ZNJf2ih03HcluexV15M3L85FRJJ6P38wPL6gls=",
     "zh:0c0d2320ea405ab55f7f6b08b3305f357739c47b8fcd85c5666bc94709c0287d",
     "zh:77d48f20cbf86e1351eff64e440cd74b6c0b16a43b791fc90e794e24218d4ba9",
     "zh:7ae8da618ac457bc307a52a02bcd233fce0d772231e6e06f89d942b452c28237",
