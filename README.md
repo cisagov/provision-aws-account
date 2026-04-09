@@ -71,14 +71,14 @@ via [Control Tower](https://aws.amazon.com/controltower/).
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | controltower | ~> 2.1 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | controltower | ~> 2.1 |
 
 ## Modules ##
@@ -88,13 +88,13 @@ No modules.
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [controltower_aws_account.accounts](https://registry.terraform.io/providers/idealo/controltower/latest/docs/resources/aws_account) | resource |
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | accounts | A list of objects specifying the details of the AWS account(s) to provision (e.g. [ {account\_email = "admin1@example.com", account\_name = "Example Account 1", account\_org\_unit = "Sandbox", provisioned\_product\_name = "example-account-1", sso\_email = "john.doe@example.com", sso\_first\_name = "John", sso\_last\_name = "Doe"}, {account\_email = "admin2@example.com", account\_name = "Example Account 2", account\_org\_unit = "Sandbox", provisioned\_product\_name = "example-account-2", sso\_email = "john.doe@example.com", sso\_first\_name = "John", sso\_last\_name = "Doe"} ]).  Field descriptions: account\_email - the root email address to associate with the AWS account, account\_name - the name of the AWS account to provision, account\_org\_unit - the name of the AWS Organizational Unit under which the account resides, provisioned\_product\_name - the name of the service catalog product that is provisioned, sso\_email - the email address of the SSO user (this email address must already exist in AWS SSO), sso\_first\_name - the first name of the SSO user, sso\_last\_name - the last name of the SSO user | `list(object({ account_email = string, account_name = string, account_org_unit = string, provisioned_product_name = string, sso_email = string, sso_first_name = string, sso_last_name = string }))` | n/a | yes |
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
@@ -102,7 +102,7 @@ No modules.
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | accounts | The AWS accounts created by Control Tower. |
 <!-- END_TF_DOCS -->
 
